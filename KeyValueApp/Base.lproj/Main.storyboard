@@ -26,9 +26,15 @@
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="saveToIcloud" destination="BYZ-38-t0r" eventType="touchUpInside" id="a8j-LG-orO"/>
+                                    <action selector="saveText" destination="BYZ-38-t0r" eventType="touchUpInside" id="eMc-mg-fs9"/>
                                 </connections>
                             </button>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eV1-N5-uln">
+                                <rect key="frame" x="276" y="323" width="51" height="31"/>
+                                <connections>
+                                    <action selector="switchForiCloud" destination="BYZ-38-t0r" eventType="valueChanged" id="mGY-Ze-hHe"/>
+                                </connections>
+                            </switch>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ct7-YI-LmN">
                                 <rect key="frame" x="202" y="247" width="197" height="30"/>
                                 <constraints>
@@ -41,12 +47,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="KuA-Dk-E7l" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="W90-X0-cPd"/>
+                            <constraint firstItem="eV1-N5-uln" firstAttribute="top" secondItem="KuA-Dk-E7l" secondAttribute="bottom" constant="8" symbolic="YES" id="bM0-yP-HhJ"/>
                             <constraint firstItem="KuA-Dk-E7l" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="f6x-u5-fjL"/>
+                            <constraint firstItem="eV1-N5-uln" firstAttribute="centerX" secondItem="KuA-Dk-E7l" secondAttribute="centerX" id="hSw-8q-qFw"/>
                             <constraint firstItem="KuA-Dk-E7l" firstAttribute="centerX" secondItem="ct7-YI-LmN" secondAttribute="centerX" id="qjW-VV-r4x"/>
                             <constraint firstItem="KuA-Dk-E7l" firstAttribute="top" secondItem="ct7-YI-LmN" secondAttribute="bottom" constant="8" symbolic="YES" id="xDS-1U-GHd"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="iCloudSwitch" destination="eV1-N5-uln" id="FEB-xj-tfd"/>
+                        <outlet property="saveButton" destination="KuA-Dk-E7l" id="E0P-Of-0Nx"/>
                         <outlet property="textField" destination="ct7-YI-LmN" id="cvI-nz-aRF"/>
                     </connections>
                 </viewController>

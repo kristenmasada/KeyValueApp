@@ -30,7 +30,7 @@ I later realized that I should display the last message the user saved upon laun
         }
     }
 
-Within the same void function, I also registered for the **NSUbiquitousKeyValueStoreDidChangeExternallyNotification** notification so that my app could handle any changes made to the text field by other instances of the app while running. Using the addObserver method to do this also requires an additional function to take some sort of action. In my case, I made this function update the message in the text field.
+Within the same void function, I also registered for the **NSUbiquitousKeyValueStoreDidChangeExternallyNotification** notification so that my app could handle any changes made to the text field by other instances of the app while running. Using the **addObserver** method to do this also requires an additional function to take some sort of action. In my case, I made this function update the message in the text field.
 
     func iCloudSetUp() {
         ...
@@ -39,3 +39,5 @@ Within the same void function, I also registered for the **NSUbiquitousKeyValueS
     func ubiquitousKeyValueStoreDidChangeExternally() {
         textField.text = iCloudKeyStore?.stringForKey(iCloudKey)
     }
+
+And that's it! Not too bad, right?

@@ -1,10 +1,10 @@
-Hi, I'm Kristen––an iOS development newbie and Nice Mohawk’s summer intern. Most recently, Ben assigned me the task of building a simple app that uses iCloud to store key-value data. 
+Hi, I'm Kristen––an iOS development newbie and [Nice Mohawk](http://nicemohawk.com)’s summer intern. Most recently, I was assigned the task of building a simple example app that uses iCloud to store key-value data. 
 
 As one would expect, I immediately looked for a tutorial on the subject. I was disappointed, however, to come up short: all of the tutorials I found were written in Objective-C and I––the newbie who only knows Swift––could only half understand what was going on.
 
 Thankfully, I did eventually figure out how to do all of this in Swift. It wasn’t too bad, either.
 
-I decided to build an app with a text field and button, so that a user can type a short message and save it to iCloud. I began by setting up [iCloud entitlements (see steps 1 & 2)] (http://code.tutsplus.com/tutorials/working-with-icloud-key-value-storage--pre-37542). 
+I decided to build an app with a text field and button, so that a user can type a short message and save it to iCloud. I began by setting up [iCloud entitlements (see steps 1 & 2)](http://code.tutsplus.com/tutorials/working-with-icloud-key-value-storage--pre-37542). 
 
 I then opened my ViewController.swift file and declared and initialized an ```NSUbiquitousKeyValueStore``` object:
 
@@ -33,12 +33,18 @@ I later realized that I should display the last message the user saved upon laun
 Within the same function, I also registered for the ```NSUbiquitousKeyValueStoreDidChangeExternallyNotification``` notification so that my app could handle any changes made to the text field by other instances of the app while running. Using the ```addObserver``` method to do this also requires an additional function to take some sort of action. In my case, I made this function update the message in the text field.
 
     func iCloudSetUp() {
-        ...
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: “ubiquitousKeyValueStoreDidChangeExternally:", name:  NSUbiquitousKeyValueStoreDidChangeExternallyNotification, object: iCloudKeyStore)
+        …
+        NSNotificationCenter.defaultCenter().addObserver(self, 
+        	selector: “ubiquitousKeyValueStoreDidChangeExternally:", 
+        	name:  NSUbiquitousKeyValueStoreDidChangeExternallyNotification, 
+        	object: iCloudKeyStore)
     }
       
     func ubiquitousKeyValueStoreDidChangeExternally() {
         textField.text = iCloudKeyStore?.stringForKey(iCloudTextKey)
     }
 
+The finished project is slightly more complicated, as I decided to incorporate a switch that allows the user to save text locally using ```NSUserDefaults``` or to iCloud.
+
 And that's it! Not too bad, right?
+

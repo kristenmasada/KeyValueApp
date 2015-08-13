@@ -11,9 +11,9 @@ import UIKit
 class ViewController: UIViewController {
 
     var iCloudKeyStore: NSUbiquitousKeyValueStore? = NSUbiquitousKeyValueStore()
-    var localKeyStore: NSUserDefaults? = NSUserDefaults.standardUserDefaults()
-    let iCloudKey = "iCloud Text Key"
-    let LocalKey = "Local Text Key"
+    var defaultKeyStore: NSUserDefaults? = NSUserDefaults.standardUserDefaults()
+    let iCloudTextKey = "iCloudText"
+    let DefaultsTextKey = "DefaultsText"
     
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var iCloudSwitch: UISwitch!
@@ -49,33 +49,34 @@ class ViewController: UIViewController {
     }
 
     func iCloudSetUp() {
-        if let savedString = iCloudKeyStore?.stringForKey(iCloudKey) {
+        if let savedString = iCloudKeyStore?.stringForKey(iCloudTextKey) {
             textField.text = savedString
         }
+        //iCloudKeyStore?.synchronize()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyValueStoreDidChange:", name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification, object: iCloudKeyStore)
     }
     
     func keyValueStoreDidChange(notification: NSNotification) {
-        textField.text = iCloudKeyStore?.stringForKey(iCloudKey)
+        textField.text = iCloudKeyStore?.stringForKey(iCloudTextKey)
     }
    
     func saveToiCloud() {
-        iCloudKeyStore?.setString(textField.text, forKey: iCloudKey)
+        iCloudKeyStore?.setString(textField.text, forKey: iCloudTextKey)
         iCloudKeyStore?.synchronize()
     }
     
     func localSetUp() {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification, object: iCloudKeyStore)
         
-        if let savedString = localKeyStore?.stringForKey(LocalKey) {
+        if let savedString = defaultKeyStore?.stringForKey(DefaultsTextKey) {
             textField.text = savedString
         }
     }
     
     func saveLocally() {
-        localKeyStore?.setObject(textField.text, forKey: LocalKey)
-        localKeyStore?.synchronize()
+        defaultKeyStore?.setObject(textField.text, forKey: DefaultsTextKey)
+        defaultKeyStore?.synchronize()
     }
 
 }

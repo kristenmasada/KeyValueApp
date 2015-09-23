@@ -49,16 +49,14 @@ class ViewController: UIViewController {
     }
 
     func iCloudSetUp() {
-        if let savedString = iCloudKeyStore?.stringForKey(iCloudTextKey) {
-            textField.text = savedString
-        }
-        //iCloudKeyStore?.synchronize()
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyValueStoreDidChange:", name: NSUbiquitousKeyValueStoreDidChangeExternallyNotification, object: iCloudKeyStore)
+        iCloudKeyStore?.synchronize()
     }
     
     func keyValueStoreDidChange(notification: NSNotification) {
-        textField.text = iCloudKeyStore?.stringForKey(iCloudTextKey)
+        if let savedString = iCloudKeyStore?.stringForKey(iCloudTextKey) {
+            textField.text = savedString
+        }
     }
    
     func saveToiCloud() {
